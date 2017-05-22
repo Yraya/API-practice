@@ -5,9 +5,9 @@
         .module('EOI')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$http', 'UsersFactory'];
+    HomeController.$inject = ['$scope', '$http', 'UsersFactory', 'GifsFactory'];
 
-    function HomeController($scope, $http, UsersFactory) {
+    function HomeController($scope, $http, UsersFactory, GifsFactory) {
         $scope.searchGifs = searchGifs;
         init();
 
@@ -17,16 +17,10 @@
         }
 
         function searchGifs() {
-            $http({
-                method: 'GET',
-                url: "http://api.giphy.com/v1/gifs/search?q=" + $scope.gifKey + "&api_key=dc6zaTOxFJmzC"
-            }).then(function successCallback(data) {
-                console.log(data);
-                $scope.gifs = data["data"];
-            }, function errorCallback(data) {
-                console.log(404 + "No gifs found");
-            });
-        }
+                GifsFactory.searchGifs($scope.gifKey).then (function(gifsUrl){
+                    $scope.gifs = gifsUrl;
+                });
+            }
     }
 
     //Peticiones por id
