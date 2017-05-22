@@ -1,0 +1,55 @@
+<div id="main">
+    <div id="usersContainer">
+        <div class="user" ng-repeat="user in users track by $index">
+            <div class="cover">
+                <img class="photo" src="{{user.photoUrl}}" onerror="this.src='images/image-not-found.svg'">
+            </div>
+            <p>{{user.name}}</p>
+            <p>Phone: {{user.phone}}</p>
+            <p>Age: {{user.age}}</p>
+            <a class="iconButton" href="#/userProfile/{{user.id}}"><img src="images/details-icon.svg"></a>
+            <button class="iconButton"><img src="images/edit-icon.svg" ng-click="modify(user)"></button>
+            <button class="iconButton"><img  src="images/delete-icon.svg" ng-click="deleteUser(user)"></button>
+        </div>
+    </div>
+    <div id="aside">
+        <div id="asideMenu">
+            <p>New User</p>
+            <button class="asideMenuButton">Data</button>
+            <button class="asideMenuButton">Gifs</button>
+            <button class="asideMenuButton">Marvel</button>
+        </div>
+        <div class="newUserForm">
+            <div id="data">
+                <p>Nombre: <br>
+                <input placeholder="Insert name"></p>
+            <p>Email: <br>
+                <input placeholder="Insert email"></p>
+            <p>Phone: <br>
+                <input placeholder="Insert phone number"></p>
+            <p>Photo: <br>
+                <input placeholder="Insert photo url"></p>
+            </div>
+            
+            <div id="gifs">
+                <p>Favorite gifs:</p>
+                <div  ng-repeat="gif in gifs track by $index" class="favoritesContainer">
+                    <img src="{{gif.images.fixed_height.url}}">
+                </div>
+                <input ng-model="gifKey" type="search" placeholder="Find gifs...">
+                <button ng-click="searchGifs()" class="seacrhButton">Search</button>
+                <div class="seacrhResultContainer"></div>
+            </div>
+            
+            <div id="marvel">
+                <p>Favorite marvel comics:</p>
+                <div class="favoritesContainer"></div>
+                <input ng-model="comicKey" type="search" placeholder="Find marvel comics...">
+                <button class="seacrhButton">Search</button>
+                <div class="seacrhResultContainer"></div>
+            </div>      
+            
+            <button class="createButton">Create</button>
+        </div>
+    </div>
+</div>
